@@ -1,0 +1,54 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "d59e25172c78f0abf99fa7152fbd197f",
+    "packages": [
+        {
+            "name": "websms-com/websmscom-php",
+            "version": "v1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/websms-com/websmscom-php.git",
+                "reference": "26c54d43d022e041ab96b931395d01d11df6f6f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/websms-com/websmscom-php/zipball/26c54d43d022e041ab96b931395d01d11df6f6f1",
+                "reference": "26c54d43d022e041ab96b931395d01d11df6f6f1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "WebSmsCom_Toolkit.inc"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gerd Reifenauer",
+                    "email": "gerd.reifenauer@websms.com"
+                }
+            ],
+            "description": "A lightweight PHP-client-library for using websms.com SMS services.",
+            "time": "2019-07-11T12:59:45+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

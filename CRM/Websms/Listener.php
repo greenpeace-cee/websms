@@ -21,7 +21,7 @@ class CRM_Websms_Listener {
     if (empty($event->params['phone'])) {
       return;
     }
-    if (in_array($event->params['phone'], self::$newPhones)) {
+    if (!in_array($event->params['phone'], self::$newPhones)) {
       return;
     }
     // this is a new phone. should we update location_type_id?
@@ -68,6 +68,8 @@ class CRM_Websms_Listener {
       return $contact['contact_id'];
     }
     else {
+      // remember phone for pre hook
+      self::$newPhones[] = $phone;
       // create a new contact
       $contact = Contact::create()
         ->addValue('display_name', $phone)

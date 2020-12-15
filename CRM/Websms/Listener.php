@@ -50,6 +50,11 @@ class CRM_Websms_Listener {
   public static function inboundSMS(GenericHookEvent $event) {
     $message = $event->message;
     $message->fromContactID = self::getOrCreateContact($message->from);
+    $session = CRM_Core_Session::singleton();
+    $userId = $session->get('userID');
+    if (empty($userId)) {
+      $session->set('userID', $message->fromContactID);
+    }
     $message->toContactID = self::getOrCreateContact($message->to);
   }
 

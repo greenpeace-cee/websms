@@ -18,18 +18,6 @@ function websms_civicrm_config(&$config) {
     return;
   }
   Civi::$statics[__FUNCTION__] = 1;
-
-  // register replacement hooks and let them run as early as possible
-  Civi::dispatcher()->addListener(
-    'hook_civicrm_pre',
-    'CRM_Websms_Listener::pre',
-    PHP_INT_MAX - 1
-  );
-  Civi::dispatcher()->addListener(
-    'hook_civicrm_inboundSMS',
-    'CRM_Websms_Listener::inboundSMS',
-    PHP_INT_MAX - 1
-  );
 }
 
 /**

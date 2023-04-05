@@ -46,6 +46,11 @@ class CRM_Websms_ProviderTest extends \PHPUnit\Framework\TestCase implements Hea
       'provider_id' => $this->providerId,
     ]);
     $_REQUEST['key'] = 'hunter2';
+    $this->callAPISuccess('Contact', 'create', [
+      'contact_type' => 'Individual',
+      'display_name' => '0800911971',
+      'api.Phone.create' => ['phone' => '0800911971'],
+    ]);
     parent::setUp();
   }
 
@@ -114,44 +119,6 @@ class CRM_Websms_ProviderTest extends \PHPUnit\Framework\TestCase implements Hea
     $this->assertEquals('message content', $activity['details']);
     $this->assertEquals('9eca31715a1c896cbc1b', $activity['result']);
     $this->assertEquals($toContact['id'], $activity['source_contact_id']);
-  }
-
-  public function testLocationType() {
-    // ensure location_type_id 1 is the default
-    LocationType::update()
-      ->addWhere('id', '=', 1)
-      ->addValue('is_default', 1)
-      ->execute();
-    // set websms to use location type 2
-    \Civi::settings()->set('websms_default_location_type_id', 2);
-    $this->expectOutputRegex('/^{"statusCode":2000,"statusMessage":"ok activity_id=(\d+)"}/');
-    $this->processInboundRequest();
-
-    $fromContact = $this->callAPISuccess('Contact', 'getsingle', ['phone' => '436801234567']);
-    $this->assertPrimaryPhoneLocationType($fromContact['id'], 2);
-    Phone::update()
-      ->addWhere('contact_id', '=', $fromContact['id'])
-      ->addWhere('is_primary', '=', 1)
-      ->addValue('location_type_id', 1)
-      ->execute();
-    $this->processInboundRequest();
-    $this->assertPrimaryPhoneLocationType($fromContact['id'], 1);
-  }
-
-  private function assertPrimaryPhoneLocationType($contactId, $locationTypeId) {
-    $phone = Phone::get()
-      ->setSelect([
-        'location_type_id',
-      ])
-      ->addWhere('contact_id', '=', $contactId)
-      ->addWhere('is_primary', '=', 1)
-      ->execute()
-      ->first();
-    $this->assertEquals(
-      $locationTypeId,
-      $phone['location_type_id'],
-      'Unexpected location_type_id for phone'
-    );
   }
 
   private function processInboundRequest(array $request = self::SAMPLE_REQUEST) {

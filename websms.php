@@ -42,15 +42,6 @@ function websms_civicrm_install() {
 }
 
 /**
- * Implements hook_civicrm_postInstall().
- *
- * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_postInstall
- */
-function websms_civicrm_postInstall() {
-  _websms_civix_civicrm_postInstall();
-}
-
-/**
  * Implements hook_civicrm_uninstall().
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_uninstall
@@ -70,7 +61,6 @@ function websms_civicrm_uninstall() {
     'name'                   => 'websms',
     'api.SmsProvider.delete' => [],
   ]);
-  _websms_civix_civicrm_uninstall();
 }
 
 /**
@@ -120,26 +110,4 @@ function websms_civicrm_disable() {
     'is_active'              => 1,
     'api.SmsProvider.create' => ['is_active' => 0],
   ]);
-  _websms_civix_civicrm_disable();
 }
-
-/**
- * Implements hook_civicrm_upgrade().
- *
- * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_upgrade
- */
-function websms_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
-  return _websms_civix_civicrm_upgrade($op, $queue);
-}
-
-/**
- * Implements hook_civicrm_entityTypes().
- *
- * Declare entity types provided by this module.
- *
- * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_entityTypes
- */
-function websms_civicrm_entityTypes(&$entityTypes) {
-  _websms_civix_civicrm_entityTypes($entityTypes);
-}
-

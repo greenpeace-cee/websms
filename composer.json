@@ -1,4 +1,6 @@
 {
+    "name": "greenpeace-cee/websms",
+    "type": "civicrm-ext",
     "require": {
         "websms-com/websmscom-php": "^1.0"
     }

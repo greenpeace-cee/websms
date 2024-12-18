@@ -4,7 +4,11 @@ use Civi\Api4\OptionGroup;
 use Civi\Api4\OptionValue;
 
 require_once 'websms.civix.php';
-require_once __DIR__ . '/vendor/autoload.php';
+$autoload = __DIR__ . '/vendor/autoload.php';
+
+if (file_exists($autoload)) {
+  require_once $autoload;
+}
 
 /**
  * Implements hook_civicrm_config().
